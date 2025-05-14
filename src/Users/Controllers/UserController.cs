@@ -45,7 +45,7 @@ namespace BackendApi.Users.Controllers
             }
             var userDto = await _userService.Create(userInsertDto);
 
-            return CreatedAtAction(nameof(GetById), new { UserId = userDto.UserId }, new UserDto
+            return CreatedAtAction(nameof(GetById), new { id = userDto.UserId }, new UserDto
             {
                 UserId = userDto.UserId,
                 Username = userDto.Username,

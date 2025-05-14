@@ -13,17 +13,17 @@ namespace BackendApi.Data
 
         public DbSet<UserModel> Users { get; set; } = null!;
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
+        // protected override void OnModelCreating(ModelBuilder modelBuilder)
+        // {
+        //     base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<UserModel>()
-                .HasIndex(u => u.Email)
-                .IsUnique();
+        //     modelBuilder.Entity<UserModel>()
+        //         .HasIndex(u => u.Email)
+        //         .IsUnique();
 
-            modelBuilder.Entity<UserModel>()
-                .HasIndex(u => u.Username)
-                .IsUnique();
-        }
+        //     modelBuilder.Entity<UserModel>()
+        //         .HasIndex(u => u.Username)
+        //         .IsUnique();
+        // }
     }
 }

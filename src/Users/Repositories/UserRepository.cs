@@ -23,9 +23,7 @@ namespace BackendApi.Users.Repositories
         }
         public async Task Create(UserModel user)
         {
-
-            await _context.Users.AddAsync(user);
-            
+            await _context.Users.AddAsync(user);   
         }
 
 
