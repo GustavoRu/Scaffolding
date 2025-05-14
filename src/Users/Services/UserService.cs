@@ -66,10 +66,10 @@ namespace BackendApi.Users.Services
 
         public bool Validate(UserInsertDto userInsertDto)
         {
-            // if(_beerRepository.Search(b => b.Name == beerInsertDto.Name).Count() > 0){
-            //     Errors.Add("No puede existir una cerveza con un nombre ya existentre");
-            //     return false;
-            // }
+            if(_userRepository.Search(b => b.Email == userInsertDto.Email).Count() > 0){
+                Errors.Add("No puede existir un usuario con el mismo email");
+                return false;
+            }
             return true;
         }
     }

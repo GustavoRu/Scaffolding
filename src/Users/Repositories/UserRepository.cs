@@ -29,6 +29,8 @@ namespace BackendApi.Users.Repositories
 
 
         public async Task Save() => await _context.SaveChangesAsync();
+
+        public IEnumerable<UserModel> Search(Func<UserModel, bool> filter) => _context.Users.Where(filter).ToList();
     }
 
 }

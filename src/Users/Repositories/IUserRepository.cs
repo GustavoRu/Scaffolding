@@ -11,5 +11,6 @@ namespace BackendApi.Users.Repositories
         // void Delete(int id);
 
         Task Save();
+        IEnumerable<UserModel> Search(Func<UserModel, bool> filter);
     }
 }

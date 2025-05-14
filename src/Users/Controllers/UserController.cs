@@ -41,7 +41,7 @@ namespace BackendApi.Users.Controllers
             }
             if (!_userService.Validate(userInsertDto))
             {
-                // return BadRequest(_userService.Errors);
+                return BadRequest(_userService.Errors);
             }
             var userDto = await _userService.Create(userInsertDto);
 
