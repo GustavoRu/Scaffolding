@@ -1,0 +1,15 @@
+using BackendApi.Users.DTOs;
+using BackendApi.Users.Models;
+namespace BackendApi.Users.Repositories
+{
+    public interface IUserRepository
+    {
+        Task<IEnumerable<UserModel>> GetAll();
+        Task<UserModel> GetById(int id);
+        Task Create(UserModel user);
+        // void Update(UserUpdateDto userUpdateDto);
+        // void Delete(int id);
+
+        Task Save();
+    }
+}
