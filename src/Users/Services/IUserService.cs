@@ -8,7 +8,7 @@ namespace BackendApi.Users.Services
         Task<UserDto> GetById(int id);
         Task<UserDto> Create(UserInsertDto userInsertDto);
         Task<UserDto> Update(int id, UserUpdateDto userUpdateDto);
-        // Task<bool> Delete(int id);
+        Task<UserDto> Delete(int id);
 
 
         bool Validate(UserInsertDto dto);

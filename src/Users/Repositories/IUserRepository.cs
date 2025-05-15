@@ -8,7 +8,7 @@ namespace BackendApi.Users.Repositories
         Task<UserModel> GetById(int id);
         Task Create(UserModel user);
         void Update(UserModel user);
-        // void Delete(int id);
+        void Delete(UserModel user);
 
         Task Save();
         IEnumerable<UserModel> Search(Func<UserModel, bool> filter);

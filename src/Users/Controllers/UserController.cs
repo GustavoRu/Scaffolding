@@ -77,5 +77,16 @@ namespace BackendApi.Users.Controllers
             return Ok(userDto);
         }
 
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<UserDto>> Delete(int id)
+        {
+            var userDto = await _userService.Delete(id);
+            if (userDto == null)
+            {
+                return NotFound();
+            }
+            return Ok(userDto);
+        }    
+
     }
 }

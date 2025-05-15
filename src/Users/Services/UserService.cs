@@ -83,6 +83,23 @@ namespace BackendApi.Users.Services
             return null;
         }
 
+        public async Task<UserDto> Delete(int id)
+        {
+            var user = await _userRepository.GetById(id);
+            if (user != null)
+            {
+                _userRepository.Delete(user);
+                await _userRepository.Save();
+                return new UserDto
+                {
+                    UserId = user.UserId,
+                    Username = user.Username,
+                    Email = user.Email
+                };
+            }
+            return null;
+        }
+
         public bool Validate(UserInsertDto userInsertDto)
         {
             if(_userRepository.Search(b => b.Email == userInsertDto.Email).Count() > 0){

@@ -32,6 +32,11 @@ namespace BackendApi.Users.Repositories
             _context.Entry(user).State = EntityState.Modified;
         }
 
+        public void Delete(UserModel user)
+        {
+            _context.Users.Remove(user);
+        }
+
 
         public async Task Save() => await _context.SaveChangesAsync();
 
