@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using BackendApi.Users.DTOs;
 using BackendApi.Users.Services;
 using FluentValidation;
+using BackendApi.Users.Validators;
 namespace BackendApi.Users.Controllers
 {
     [Route("api/[controller]")]
@@ -10,11 +11,13 @@ namespace BackendApi.Users.Controllers
     {
         private readonly IUserService _userService;
         private IValidator<UserInsertDto> _userInsertValidator;
+        private IValidator<UserUpdateDto> _userUpdateValidator;
 
-        public UserController(IUserService userService, IValidator<UserInsertDto> userInsertValidator)
+        public UserController(IUserService userService, IValidator<UserInsertDto> userInsertValidator, IValidator<UserUpdateDto> userUpdateValidator)
         {
             _userService = userService;
             _userInsertValidator = userInsertValidator;
+            _userUpdateValidator = userUpdateValidator;
         }
 
         [HttpGet]
@@ -52,6 +55,26 @@ namespace BackendApi.Users.Controllers
                 Email = userDto.Email
             });
 
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<UserDto>> Update(int id, UserUpdateDto userUpdateDto)
+        {
+            var validationResult = await _userUpdateValidator.ValidateAsync(userUpdateDto);
+            if (!validationResult.IsValid)
+            {
+                return BadRequest(validationResult.Errors);
+            }
+            if (!_userService.Validate(userUpdateDto))
+            {
+                return BadRequest(_userService.Errors);
+            }
+            var userDto = await _userService.Update(id, userUpdateDto);
+            if (userDto == null)
+            {
+                return NotFound();
+            }
+            return Ok(userDto);
         }
 
     }

@@ -26,6 +26,11 @@ namespace BackendApi.Users.Repositories
             await _context.Users.AddAsync(user);   
         }
 
+        public void Update(UserModel user)
+        {
+            _context.Users.Attach(user);
+            _context.Entry(user).State = EntityState.Modified;
+        }
 
 
         public async Task Save() => await _context.SaveChangesAsync();

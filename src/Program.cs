@@ -21,7 +21,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => { options.UseSqlS
 
 //validators
 builder.Services.AddScoped<IValidator<UserInsertDto>, UserInsertValidator>();
-// builder.Services.AddScoped<IValidator<BeerInsertDto>, BeerInsertValidator>();
+builder.Services.AddScoped<IValidator<UserUpdateDto>, UserUpdateValidator>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

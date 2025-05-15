@@ -7,8 +7,11 @@ namespace BackendApi.Users.Services
         Task<IEnumerable<UserDto>> GetAll();
         Task<UserDto> GetById(int id);
         Task<UserDto> Create(UserInsertDto userInsertDto);
+        Task<UserDto> Update(int id, UserUpdateDto userUpdateDto);
+        // Task<bool> Delete(int id);
 
 
         bool Validate(UserInsertDto dto);
+        bool Validate(UserUpdateDto dto);
     }
 }

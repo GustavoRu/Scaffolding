@@ -7,7 +7,7 @@ namespace BackendApi.Users.Repositories
         Task<IEnumerable<UserModel>> GetAll();
         Task<UserModel> GetById(int id);
         Task Create(UserModel user);
-        // void Update(UserUpdateDto userUpdateDto);
+        void Update(UserModel user);
         // void Delete(int id);
 
         Task Save();

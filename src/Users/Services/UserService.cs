@@ -62,11 +62,39 @@ namespace BackendApi.Users.Services
             };
         }
 
+        public async Task<UserDto> Update(int id, UserUpdateDto userUpdateDto)
+        {
+            var user = await _userRepository.GetById(id);
+            if (user != null)
+            {
+                user.Username = userUpdateDto.Username;
+                user.Email = userUpdateDto.Email;
+                user.IsActive = userUpdateDto.IsActive;
+                _userRepository.Update(user);
+                await _userRepository.Save();
+                return new UserDto
+                {
+                    UserId = user.UserId,
+                    Username = user.Username,
+                    Email = user.Email
+                };
 
+            }
+            return null;
+        }
 
         public bool Validate(UserInsertDto userInsertDto)
         {
             if(_userRepository.Search(b => b.Email == userInsertDto.Email).Count() > 0){
+                Errors.Add("No puede existir un usuario con el mismo email");
+                return false;
+            }
+            return true;
+        }
+
+        public bool Validate(UserUpdateDto userUpdateDto)
+        {
+            if(_userRepository.Search(b => b.Email == userUpdateDto.Email).Count() > 0){
                 Errors.Add("No puede existir un usuario con el mismo email");
                 return false;
             }
